@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-MZ">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080d19">
+  <meta name="description" content="Protótipo académico de redesenho do STV Play. Descubra, pesquise e organize conteúdos moçambicanos.">
+  <title>STV Play — Nova experiência digital | Protótipo académico</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Saltar para o conteúdo</a>
+
+  <!-- Biblioteca de ícones SVG: não necessita de bibliotecas externas. -->
+  <svg aria-hidden="true" class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
+    <symbol id="i-live" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="m9 2 3 3 3-3M8 22h8"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/></symbol>
+    <symbol id="i-manage" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12h8m-4-4v8"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10h.01"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7z"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M13 5h6v6m0-6-9 9"/><path d="M18 14v5H5V6h5"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M5 5l14 14M19 5 5 19"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16m-11 0V4h6v3m-9 0 1 13h10l1-13M10 11v6m4-6v6"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="m4 17 1 3 3-1L20 7l-4-4L4 17zM14 5l4 4"/></symbol>
+    <symbol id="i-filter" viewBox="0 0 24 24"><path d="M4 7h16M7 12h10m-7 5h4"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m4 12 5 5L20 6"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 7v5h5M5 12a8 8 0 1 1 2 5"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4 4l2 2m12 12 2 2M2 12h2m16 0h2M4 20l2-2M18 6l2-2"/></symbol>
+  </svg>
+
+  <div class="site-shell">
+    <aside class="sidebar" aria-label="Menu principal">
+      <a class="brand" href="#view-inicio" data-view-link="inicio" aria-label="STV Play — Início">
+        <span class="brand-emblem" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span class="brand-wordmark">stv<span>play</span><small>REDESIGN · DEMO</small></span>
+      </a>
+      <p class="sidebar-label">EXPLORAR</p>
+      <nav class="side-nav" aria-label="Secções">
+        <button class="nav-link is-active" data-view="inicio" type="button"><svg class="icon"><use href="#i-home"/></svg><span>Início</span></button>
+        <button class="nav-link" data-view="catalogo" type="button"><svg class="icon"><use href="#i-grid"/></svg><span>Explorar programas</span></button>
+        <button class="nav-link" data-view="directo" type="button"><svg class="icon"><use href="#i-live"/></svg><span>Em directo</span><span class="nav-dot" aria-hidden="true"></span></button>
+        <button class="nav-link" data-view="favoritos" type="button"><svg class="icon"><use href="#i-heart"/></svg><span>Minha lista</span><span id="nav-fav-count" class="nav-count">0</span></button>
+      </nav>
+      <p class="sidebar-label second-label">PROJECTO</p>
+      <nav class="side-nav" aria-label="Ferramentas do projecto">
+        <button class="nav-link" data-view="gestao" type="button"><svg class="icon"><use href="#i-manage"/></svg><span>Gerir conteúdos</span></button>
+        <button class="nav-link" data-view="sobre" type="button"><svg class="icon"><use href="#i-info"/></svg><span>Sobre o redesenho</span></button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="sidebar-feature"><span class="feature-spark">✦</span><strong>Uma nova forma de descobrir Moçambique.</strong><p>Interface experimental criada para Tecnologias Web.</p></div>
+        <div class="side-copyright">Protótipo académico · 2026<br>Não afiliado à STV.</div>
+      </div>
+    </aside>
+
+    <div class="workspace">
+      <header class="topbar">
+        <div class="topbar-leading"><span class="eyebrow">PESQUISA EM TODO O CATÁLOGO</span><span class="topbar-greeting">Encontre o seu programa</span></div>
+        <label class="global-search" for="search-input">
+          <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+          <input id="search-input" type="search" placeholder="Pesquisar em todo o catálogo..." autocomplete="off" aria-label="Pesquisar em todo o catálogo; os resultados aparecem em Explorar programas">
+          <kbd>/</kbd>
+        </label>
+        <button class="topbar-create" id="header-add" type="button"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span>Novo conteúdo</span></button>
+      </header>
+
+      <main id="main-content" tabindex="-1">
+        <!-- Página de entrada -->
+        <section class="view is-visible" id="view-inicio" aria-labelledby="home-title">
+          <div class="intro-strip"><span class="intro-dot"></span><span>FEITO PARA QUEM GOSTA DE HISTÓRIAS MOÇAMBICANAS</span><span class="strip-right">Conceito visual · 2026</span></div>
+          <section class="hero" aria-labelledby="home-title">
+            <div class="hero-mesh" aria-hidden="true"></div><div class="hero-glow" aria-hidden="true"></div>
+            <div class="hero-content">
+              <div class="hero-tag"><span class="tag-line"></span>EM DESTAQUE · MÚSICA & TALENTO</div>
+              <h1 id="home-title">A nossa cultura.<br><em>O nosso palco.</em></h1>
+              <p>Da informação que importa ao entretenimento que nos une. Descubra os conteúdos da STV Play numa experiência redesenhada.</p>
+              <div class="hero-actions">
+                <button class="btn btn-primary" id="hero-explore" type="button"><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg>Explorar conteúdos</button>
+                <button class="btn btn-ghost" id="hero-feature" type="button">Conhecer Fama Show <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+              </div>
+              <div class="hero-footnote"><span class="pulse-small"></span>Catálogo demonstrativo com ligações ao site oficial</div>
+            </div>
+            <div class="hero-visual" aria-hidden="true"><div class="hero-disc hero-disc-one"></div><div class="hero-disc hero-disc-two"></div><div class="hero-stage"><span class="hero-vertical">A MÚSICA ACONTECE AQUI</span><span class="hero-art-title">FAMA<span>SHOW</span></span><div class="sound-lines"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><span class="hero-art-year">2026 / 08</span></div></div>
+          </section>
+
+          <section class="quick-categories" aria-labelledby="categories-title">
+            <div class="section-heading"><div><p class="section-kicker">ENCONTRE O SEU ESTILO</p><h2 id="categories-title">Por onde começar?</h2></div><button class="text-link" id="view-all-categories" type="button">Ver catálogo completo <svg class="icon"><use href="#i-arrow"/></svg></button></div>
+            <div class="category-grid">
+              <button type="button" class="category-tile category-news" data-category="Informação"><span class="category-index">01 /</span><span class="category-symbol">✳</span><strong>Informação</strong><small>Actualidade, debates e reportagens</small><svg class="icon"><use href="#i-arrow"/></svg></button>
+              <button type="button" class="category-tile category-entertainment" data-category="Entretenimento"><span class="category-index">02 /</span><span class="category-symbol">✦</span><strong>Entretenimento</strong><small>Talento, música e grandes momentos</small><svg class="icon"><use href="#i-arrow"/></svg></button>
+              <button type="button" class="category-tile category-variety" data-category="Variedades"><span class="category-index">03 /</span><span class="category-symbol">◎</span><strong>Variedades</strong><small>Histórias, cultura e tecnologia</small><svg class="icon"><use href="#i-arrow"/></svg></button>
+            </div>
+          </section>
+
+          <section class="home-programs" aria-labelledby="highlights-title">
+            <div class="section-heading"><div><p class="section-kicker">ESCOLHAS PARA SI</p><h2 id="highlights-title">Em destaque</h2></div><button class="text-link" id="view-all-highlights" type="button">Explorar tudo <svg class="icon"><use href="#i-arrow"/></svg></button></div>
+            <div id="featured-grid" class="program-grid featured-grid" aria-live="polite"></div>
+          </section>
+          <section class="home-banner"><div><span class="section-kicker">AO VIVO, NO SEU RITMO</span><h2>As notícias não param.<br><span>Acompanhe onde estiver.</span></h2><p>Aceda aos canais oficiais STV e STV Notícias.</p></div><button class="btn btn-primary" id="banner-live" type="button">Ver canais <svg class="icon"><use href="#i-arrow"/></svg></button><div class="banner-orb" aria-hidden="true"></div></section>
+        </section>
+
+        <!-- Catálogo pesquisável e ordenável -->
+        <section class="view" id="view-catalogo" aria-labelledby="catalog-title" hidden>
+          <div class="page-heading"><div><p class="section-kicker">CATÁLOGO</p><h1 id="catalog-title">Explore histórias <span>que inspiram.</span></h1><p>Encontre programas, filtre por categoria e escolha a ordem de apresentação.</p></div><div class="page-heading-art" aria-hidden="true">✳</div></div>
+          <div class="catalog-toolbar"><div class="filter-chips" role="group" aria-label="Filtrar por categoria"><button type="button" class="chip is-selected" data-filter="Todos" aria-pressed="true">Todos</button><button type="button" class="chip" data-filter="Informação" aria-pressed="false">Informação</button><button type="button" class="chip" data-filter="Entretenimento" aria-pressed="false">Entretenimento</button><button type="button" class="chip" data-filter="Variedades" aria-pressed="false">Variedades</button></div><label class="sort-control"><svg class="icon" aria-hidden="true"><use href="#i-filter"/></svg><span>Ordenar</span><select id="sort-select"><option value="recent">Mais recentes</option><option value="oldest">Mais antigos</option><option value="az">Título: A–Z</option><option value="za">Título: Z–A</option><option value="duration">Maior duração</option></select></label></div>
+          <div class="result-line"><p id="catalog-summary" role="status">A carregar programas...</p><button id="reset-filters" type="button" class="subtle-link">Limpar filtros</button></div>
+          <div id="catalog-grid" class="program-grid" aria-live="polite"></div>
+          <div class="empty-state" id="catalog-empty" hidden><div class="empty-icon">⌕</div><h2>Não encontrámos resultados.</h2><p>Experimente outro termo ou remova os filtros aplicados.</p><button class="btn btn-primary" id="empty-reset" type="button">Mostrar todos</button></div>
+        </section>
+
+        <!-- Ligações aos canais, sem simular reprodução não autorizada -->
+        <section class="view" id="view-directo" aria-labelledby="live-title" hidden>
+          <div class="page-heading"><div><p class="section-kicker">TRANSMISSÕES OFICIAIS</p><h1 id="live-title">O país acontece <span>agora.</span></h1><p>Descubra os canais disponíveis e abra a respectiva página oficial.</p></div><div class="page-heading-art" aria-hidden="true">◉</div></div>
+          <div class="live-grid"><article class="live-card stv-live"><div class="live-top"><span class="live-badge"><span></span>CANAL EM DIRECTO</span><span class="live-corner">01 / 02</span></div><div class="live-logo">stv<span>play</span></div><div><h2>STV</h2><p>Entretenimento, cultura e informação para diferentes públicos.</p><a class="btn btn-light" href="https://www.stvplay.co.mz/canais-em-directo-1" target="_blank" rel="noopener noreferrer">Abrir canal oficial <svg class="icon"><use href="#i-external"/></svg></a></div><div class="live-deco" aria-hidden="true"></div></article><article class="live-card news-live"><div class="live-top"><span class="live-badge"><span></span>CANAL EM DIRECTO</span><span class="live-corner">02 / 02</span></div><div class="live-logo">STV<span>NOTÍCIAS</span></div><div><h2>STV Notícias</h2><p>Informação e análise dos acontecimentos nacionais e internacionais.</p><a class="btn btn-light" href="https://www.stvplay.co.mz/canais-em-directo-1/events/stv-noticias" target="_blank" rel="noopener noreferrer">Abrir canal oficial <svg class="icon"><use href="#i-external"/></svg></a></div><div class="live-deco" aria-hidden="true"></div></article></div>
+          <div class="notice"><svg class="icon"><use href="#i-info"/></svg><p>Este protótipo não transmite vídeo. As ligações abrem o STV Play oficial, onde podem ser exigidos registo ou subscrição.</p></div>
+        </section>
+
+        <!-- Lista pessoal persistida no navegador -->
+        <section class="view" id="view-favoritos" aria-labelledby="favorites-title" hidden>
+          <div class="page-heading"><div><p class="section-kicker">A SUA SELECÇÃO</p><h1 id="favorites-title">A minha <span>lista.</span></h1><p>Guarde os programas que pretende voltar a encontrar.</p></div><div class="page-heading-art" aria-hidden="true">♡</div></div>
+          <div class="result-line"><p id="favorites-summary" role="status">0 programas guardados</p></div>
+          <div id="favorites-grid" class="program-grid" aria-live="polite"></div>
+          <div class="empty-state" id="favorites-empty" hidden><div class="empty-icon">♡</div><h2>A sua lista ainda está vazia.</h2><p>Abra um programa e seleccione o coração para o guardar aqui.</p><button class="btn btn-primary" id="favorites-explore" type="button">Explorar programas</button></div>
+        </section>
+
+        <!-- Gestão CRUD local: nenhuma alteração é feita no STV Play oficial. -->
+        <section class="view" id="view-gestao" aria-labelledby="manage-title" hidden>
+          <div class="page-heading"><div><p class="section-kicker">LABORATÓRIO DE TECNOLOGIAS WEB</p><h1 id="manage-title">Gestão de <span>conteúdos.</span></h1><p>Adicione, edite ou remova registos no catálogo local de demonstração.</p></div><button class="btn btn-primary" id="manage-add" type="button"><svg class="icon"><use href="#i-plus"/></svg>Adicionar conteúdo</button></div>
+          <div class="management-notice"><svg class="icon"><use href="#i-info"/></svg><div><strong>Ambiente de demonstração</strong><p>As operações são guardadas apenas neste navegador com localStorage. Não modificam dados do STV Play oficial.</p></div></div>
+          <div class="management-toolbar"><div><h2>Registos do catálogo</h2><p id="manage-summary">A carregar...</p></div><button class="btn btn-outline" id="restore-data" type="button"><svg class="icon"><use href="#i-reset"/></svg>Repor catálogo inicial</button></div>
+          <div class="management-search-row">
+            <label for="manage-search">Localizar programa para editar ou remover</label>
+            <input id="manage-search" type="search" autocomplete="off" placeholder="Pesquisar na gestão (ex.: Grande Entrevista)" aria-describedby="manage-search-help">
+            <p id="manage-search-help">A tabela mostra os botões <strong>Editar</strong> e <strong>Remover</strong> na coluna Acções.</p>
+          </div>
+          <div class="table-scroll"><table class="management-table"><thead><tr><th scope="col">Programa</th><th scope="col">Categoria</th><th scope="col">Data</th><th scope="col">Origem</th><th scope="col" class="actions-col">Acções</th></tr></thead><tbody id="manage-tbody"></tbody></table></div>
+          <div class="empty-state" id="manage-empty" hidden><h2>O catálogo está vazio.</h2><p>Adicione um conteúdo ou reponha o catálogo inicial.</p></div>
+        </section>
+
+        <!-- Comparação explicitamente pedida no trabalho académico -->
+        <section class="view" id="view-sobre" aria-labelledby="about-title" hidden>
+          <div class="page-heading"><div><p class="section-kicker">SOBRE O PROJECTO</p><h1 id="about-title">Redesenhar com <span>propósito.</span></h1><p>Um exercício académico de UX, acessibilidade e desenvolvimento web.</p></div></div>
+          <div class="about-top"><div><span class="section-kicker">OBJECTIVO</span><h2>Mais clareza. Menos esforço. Melhor descoberta.</h2></div><p>Esta experiência é uma proposta independente, não oficial, baseada nos títulos e categorias públicos do STV Play. As capas combinam imagens dos programas presentes no STV Play com composições gráficas demonstrativas; os direitos das capas oficiais pertencem aos respectivos titulares.</p></div>
+          <h2 class="about-heading">Original × redesenho</h2>
+          <div class="comparison-table-wrap"><table class="comparison-table"><thead><tr><th scope="col">Critério</th><th scope="col">Website original</th><th scope="col">Redesenho proposto</th></tr></thead><tbody><tr><th scope="row">Identidade visual</th><td>Interface actual da plataforma comercial</td><td>Nova linguagem visual com hierarquia, contraste e cartões temáticos</td></tr><tr><th scope="row">Consistência de idioma</th><td>Elementos mistos em português e inglês observados nas páginas consultadas</td><td>Rótulos de navegação e operações uniformizados em português</td></tr><tr><th scope="row">Encontrar programas</th><td>Organização por secções e páginas de programas</td><td>Pesquisa local imediata, filtros e ordenação combináveis</td></tr><tr><th scope="row">Gestão do catálogo</th><td>Não é uma função pública destinada a visitantes</td><td>CRUD demonstrativo para avaliar HTML, CSS, JavaScript e algoritmos</td></tr><tr><th scope="row">Favoritos</th><td>Não avaliado na área autenticada</td><td>Lista pessoal local, sem necessidade de iniciar sessão</td></tr><tr><th scope="row">Acessibilidade</th><td>Requer auditoria formal</td><td>Estrutura semântica, foco visível, rótulos e adaptação a ecrãs pequenos</td></tr></tbody></table></div>
+          <div class="about-links"><a href="https://www.stvplay.co.mz/" target="_blank" rel="noopener noreferrer">Visitar o STV Play original <svg class="icon"><use href="#i-external"/></svg></a><a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener noreferrer">Critérios de acessibilidade WCAG 2.2 <svg class="icon"><use href="#i-external"/></svg></a></div>
+          <div class="notice"><svg class="icon"><use href="#i-info"/></svg><p>Não foram efectuados testes comparativos de velocidade ou uma auditoria formal ao site original. As melhorias propostas devem ser validadas em testes posteriores.</p></div>
+        </section>
+      </main>
+      <footer class="site-footer"><span>STV Play — Redesenho académico independente · V3.2</span><span>HTML5 · CSS3 · JavaScript puro</span><button type="button" id="footer-about">Sobre o projecto <svg class="icon"><use href="#i-arrow"/></svg></button></footer>
+    </div>
+  </div>
+
+  <!-- Navegação compacta para telemóveis -->
+  <nav class="mobile-nav" aria-label="Menu para dispositivos móveis"><button class="mobile-link is-active" type="button" data-view="inicio"><svg class="icon"><use href="#i-home"/></svg><span>Início</span></button><button class="mobile-link" type="button" data-view="catalogo"><svg class="icon"><use href="#i-grid"/></svg><span>Explorar</span></button><button class="mobile-link" type="button" data-view="directo"><svg class="icon"><use href="#i-live"/></svg><span>Ao vivo</span></button><button class="mobile-link" type="button" data-view="favoritos"><svg class="icon"><use href="#i-heart"/></svg><span>Minha lista</span></button><button class="mobile-link" type="button" data-view="gestao"><svg class="icon"><use href="#i-manage"/></svg><span>Gerir</span></button></nav>
+
+  <!-- Formulário modal para criar/editar conteúdos -->
+  <dialog id="content-dialog" class="content-dialog" aria-labelledby="dialog-title">
+    <form id="content-form" novalidate>
+      <div class="dialog-head"><div><p class="section-kicker">CATÁLOGO LOCAL</p><h2 id="dialog-title">Novo conteúdo</h2></div><button type="button" class="icon-button" id="close-form" aria-label="Fechar formulário"><svg class="icon"><use href="#i-close"/></svg></button></div>
+      <p class="dialog-help">Preencha os campos para acrescentar um programa ou episódio ao seu catálogo demonstrativo.</p>
+      <div class="form-fields"><label>Título <span>*</span><input name="title" id="field-title" type="text" maxlength="90" required placeholder="Ex.: Especial sobre Maputo"></label><label>Categoria <span>*</span><select name="category" id="field-category" required><option value="Informação">Informação</option><option value="Entretenimento">Entretenimento</option><option value="Variedades">Variedades</option></select></label><div class="form-row"><label>Data <span>*</span><input name="date" id="field-date" type="date" required></label><label>Duração (min) <span>*</span><input name="duration" id="field-duration" type="number" min="1" max="1440" value="45" required></label></div><label>Descrição <span>*</span><textarea name="description" id="field-description" maxlength="450" rows="3" required placeholder="Breve descrição do conteúdo..."></textarea></label><label>Ligação oficial (opcional)<input name="url" id="field-url" type="url" placeholder="https://www.stvplay.co.mz/..."></label>
+        <div class="image-field">
+          <label for="field-image">Capa do programa (opcional)</label>
+          <input name="image" id="field-image" type="text" maxlength="120" autocomplete="off" placeholder="Nome opcional, ex.: grande-entrevista.avif" aria-describedby="image-help poster-preview-message">
+          <p id="image-help"><strong>Atenção:</strong> este campo está inicialmente vazio. Guarde a capa em <code>assets/posters/</code> e escreva o título do programa: o sistema tentará localizar automaticamente um ficheiro correspondente (por exemplo, <strong>grande-entrevista.avif</strong>). Também pode escrever manualmente o nome. Aguarde pela mensagem <strong>“Capa encontrada”</strong> antes de guardar. Aceita AVIF, WebP, JPG e PNG.</p>
+          <div class="poster-preview" id="poster-preview">
+            <img id="poster-preview-image" alt="Pré-visualização da capa seleccionada" hidden>
+            <span id="poster-preview-message" role="status" aria-live="polite">Sem capa seleccionada: será criada uma capa gráfica.</span>
+          </div>
+        </div>
+      </div>
+      <p id="form-error" class="form-error" role="alert" hidden></p>
+      <div class="dialog-actions"><button type="button" class="btn btn-outline" id="cancel-form">Cancelar</button><button type="submit" class="btn btn-primary" id="submit-form">Guardar conteúdo</button></div>
+    </form>
+  </dialog>
+
+  <!-- Modal de detalhe: informação, link oficial e favoritos -->
+  <dialog id="detail-dialog" class="detail-dialog" aria-labelledby="detail-title"><div class="detail-container"><button type="button" class="icon-button detail-close" id="close-detail" aria-label="Fechar detalhes"><svg class="icon"><use href="#i-close"/></svg></button><div id="detail-cover" class="detail-cover"></div><div class="detail-body"><p class="section-kicker" id="detail-kicker"></p><h2 id="detail-title"></h2><div class="detail-meta" id="detail-meta"></div><p id="detail-description"></p><div class="detail-actions"><button class="btn btn-primary" id="detail-favorite" type="button"></button><button class="btn btn-outline" id="detail-edit" type="button" hidden><svg class="icon"><use href="#i-edit"/></svg> Editar</button><button class="btn btn-danger" id="detail-delete" type="button" hidden><svg class="icon"><use href="#i-trash"/></svg> Remover</button><a class="btn btn-outline" id="detail-official" href="#" target="_blank" rel="noopener noreferrer">Ver no STV Play oficial <svg class="icon"><use href="#i-external"/></svg></a></div></div></div></dialog>
+
+  <!-- Diálogo de confirmação em vez de apagar acidentalmente -->
+  <dialog id="confirm-dialog" class="confirm-dialog" aria-labelledby="confirm-title"><div class="confirm-body"><div class="confirm-icon"><svg class="icon"><use href="#i-trash"/></svg></div><h2 id="confirm-title">Remover conteúdo?</h2><p id="confirm-message"></p><div class="dialog-actions"><button type="button" class="btn btn-outline" id="confirm-cancel">Cancelar</button><button type="button" class="btn btn-danger" id="confirm-accept">Confirmar</button></div></div></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+</body>
+</html>
